@@ -1,21 +1,10 @@
-import io
-import time
-import tempfile
-from pydantic import BaseModel
-from cog import Predictor, Input, Path, File
+import cog
 
-class Output(BaseModel):
-    file: File
-
-
-class Predictor(Predictor):
+class Predictor(cog.Predictor):
     def setup(self):
-        print("Preparing model")
-        self.foo = "foo"
+        self.prefix = "hello"
 
-    def predict(self,
-                prompts: str = Input(title="text prompt"),
-                settings: str = Input(title="yaml settings")
-    ) -> str:
-        print("Predicting " + prompts)
-        return Output(file=io.StringIO("output_file"))
+    @cog.input("prompts", type=str, help="text prompt")
+    @cog.input("settings", type=str, help="yaml settings")
+    def predict(self, input):
+        return io.StringIO("output_file")
