@@ -14,7 +14,7 @@ class Predictor(cog.Predictor):
     def predict(self, prompts, settings):
         print(prompts)
         print(settings)
-        img = Image.new('RGB', (width, height))
+        im = Image.new('RGB', (100, 100))
         out_path = Path(tempfile.mkdtemp()) / "out.png"
         im.save(str(out_path))
         return out_path
